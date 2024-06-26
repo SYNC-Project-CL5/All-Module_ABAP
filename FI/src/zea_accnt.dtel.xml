@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZEA_ACCNT</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZEA_ACCNT</DOMNAME>
+    <HEADLEN>04</HEADLEN>
+    <SCRLEN1>04</SCRLEN1>
+    <SCRLEN2>04</SCRLEN2>
+    <SCRLEN3>04</SCRLEN3>
+    <DDTEXT>계좌번호</DDTEXT>
+    <REPTEXT>계좌번호</REPTEXT>
+    <SCRTEXT_S>계좌번호</SCRTEXT_S>
+    <SCRTEXT_M>계좌번호</SCRTEXT_M>
+    <SCRTEXT_L>계좌번호</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

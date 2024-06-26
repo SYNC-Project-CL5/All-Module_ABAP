@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] SD 모듈 DA 자동함수 생성</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_FI_DAF01</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_FI_DATOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_FI_DA</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_FI_DA</FUNCNAME>
+     <SHORT_TEXT>For DA Document</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_PAYNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_PAYNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_INVDT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_INVDT</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_CUSCODE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_CUSCODE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_CHARGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_CHARGE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_EATAX</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_EATAX</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_WAERS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_WAERS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_NETPR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_DMBTR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_AUQUA</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_AUQUA</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PLANT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_WERKS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_CHECK</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>C</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BELNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BUKRS</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_GJAHR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_PAYNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>청구 문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_INVDT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>청구 일자</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_CUSCODE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BP] 고객코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_CHARGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>공제액</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_EATAX</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>부가 가치세</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_WAERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>통화코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_NETPR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>판매 단가</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_AUQUA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>주문 수량</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PLANT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[BP] 직영점코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_CHECK</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>소매일 경우 &apos;X&apos; 값을 주세요</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회사코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회계연도</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

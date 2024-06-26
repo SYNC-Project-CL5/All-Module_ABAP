@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[MM]자재문서 함수</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_MM_FGF01</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_MM_FGF02</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_MM_FGTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_MM_FG</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_MM_MMFG</FUNCNAME>
+     <SHORT_TEXT>[MM]자재입고 함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_PONUM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT140-PONUM</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT090-MBLNR</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR1</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_PONUM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>구매오더번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Message(&apos;S&apos;:성공, &apos;E&apos;:실패)</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZEA_MM_PPFG</FUNCNAME>
+     <SHORT_TEXT>[MM]자재문서 PP 함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_AUFK-AUFNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMY190</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT090</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMY100</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>생산오더 ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서(재고테이블) 테이블 타입</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[MM] 자재문서 Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서 ITEM 테이블타입</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZEA_MM_PP_OFG</FUNCNAME>
+     <SHORT_TEXT>[MM] PP 검수 함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_AFRU-AUFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>생산오더 ID</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZEA_MM_SDFG</FUNCNAME>
+     <SHORT_TEXT>[MM] 자재문서 SD 함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_SBELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_SDT060-SBELNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_POSNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_SDT110-POSNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT090</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMY100</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR1</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_SBELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>출고문서번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_POSNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>출고문서 품목번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[MM] 자재문서 Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서 ITEM 테이블타입</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Message Type(&apos;S&apos;:성공, &apos;E&apos;:실패)</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZEA_MM_TRF</FUNCNAME>
+     <SHORT_TEXT>[MM] 자재 이전 함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_PLANTFR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT190-WERKS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PLANTTO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT190-WERKS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT190-MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_QUANTITY</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT190-CALQTY</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT090</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMY100</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_PLANTFR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트ID(시작)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PLANTTO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>플랜트ID(도착)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_QUANTITY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>이동 수량</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[MM] 자재문서 Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서 ITEM 테이블타입</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

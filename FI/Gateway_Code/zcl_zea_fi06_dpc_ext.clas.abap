@@ -1,0 +1,517 @@
+class ZCL_ZEA_FI06_DPC_EXT definition
+  public
+  inheriting from ZCL_ZEA_FI06_DPC
+  create public .
+
+public section.
+
+  methods /IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_BEGIN
+    redefinition .
+  methods /IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_END
+    redefinition .
+  methods /IWBEP/IF_MGW_CORE_SRV_RUNTIME~CHANGESET_BEGIN
+    redefinition .
+protected section.
+
+  methods INVENTORYSET_GET_ENTITY
+    redefinition .
+  methods INVENTORYSET_GET_ENTITYSET
+    redefinition .
+  methods PLANT_INVENTSET_GET_ENTITY
+    redefinition .
+  methods PLANT_INVENTSET_GET_ENTITYSET
+    redefinition .
+  methods PLANT_INVENTSET_UPDATE_ENTITY
+    redefinition .
+  methods PLANT_INVENT_COU_GET_ENTITYSET
+    redefinition .
+  methods INVENTORYSET_UPDATE_ENTITY
+    redefinition .
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ZEA_FI06_DPC_EXT IMPLEMENTATION.
+
+
+  method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_BEGIN.
+**TRY.
+*CALL METHOD SUPER->/IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_BEGIN
+*  EXPORTING
+*    IT_OPERATION_INFO =
+**  CHANGING
+**    CV_DEFER_MODE     =
+*    .
+**  CATCH /IWBEP/CX_MGW_BUSI_EXCEPTION.
+**  CATCH /IWBEP/CX_MGW_TECH_EXCEPTION.
+**ENDTRY.
+  endmethod.
+
+
+  method /IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_END.
+**TRY.
+*CALL METHOD SUPER->/IWBEP/IF_MGW_APPL_SRV_RUNTIME~CHANGESET_END
+*    .
+**  CATCH /IWBEP/CX_MGW_BUSI_EXCEPTION.
+**  CATCH /IWBEP/CX_MGW_TECH_EXCEPTION.
+**ENDTRY.
+  endmethod.
+
+
+  method /IWBEP/IF_MGW_CORE_SRV_RUNTIME~CHANGESET_BEGIN.
+**TRY.
+*CALL METHOD SUPER->/IWBEP/IF_MGW_CORE_SRV_RUNTIME~CHANGESET_BEGIN
+*  EXPORTING
+*    IT_OPERATION_INFO  =
+**    IT_CHANGESET_INPUT =
+**  CHANGING
+**    CV_DEFER_MODE      =
+*    .
+**  CATCH /IWBEP/CX_MGW_BUSI_EXCEPTION.
+**  CATCH /IWBEP/CX_MGW_TECH_EXCEPTION.
+**ENDTRY.
+  endmethod.
+
+
+  METHOD INVENTORYSET_GET_ENTITY.
+
+    DATA LS_KEY LIKE LINE OF IT_KEY_TAB.
+    READ TABLE IT_KEY_TAB INTO LS_KEY INDEX 1.
+*
+*    DATA LV_MOVID TYPE ZEA_MMT200-MOVID.
+*
+*    LV_MOVID = LS_KEY-VALUE.
+*
+*    SELECT * FROM ZEA_T001W AS B
+*            JOIN  ZEA_MMT200 AS A
+*             ON  A~PLANTTO EQ B~WERKS
+*
+*         JOIN ZEA_MMT020 AS C
+*            ON A~MATNR EQ C~MATNR
+*            AND C~SPRAS EQ @SY-LANGU
+*
+*      WHERE MOVID EQ @LV_MOVID
+*      INTO CORRESPONDING FIELDS OF @ER_ENTITY.
+*
+*ENDSELECT.
+    DATA: LV_MOVID TYPE ZEA_MMT200-MOVID.
+    DATA: LV_BOOKID TYPE ZEA_MMT200-BOOKID.
+
+    LOOP AT IT_KEY_TAB INTO   LS_KEY . " 괄호 안의 값들을 점검
+      CASE LS_KEY-NAME.
+        WHEN 'Movid'.
+          LV_MOVID = LS_KEY-VALUE.
+        WHEN 'Bookid'.
+          LV_BOOKID = LS_KEY-VALUE.
+      ENDCASE.
+    ENDLOOP.
+
+    IF SY-SUBRC EQ 0. " LOOP 가 한번이라도 작동했을 때
+      SELECT *
+        FROM ZEA_MMT200
+       WHERE MOVID EQ @LV_MOVID
+        AND BOOKID EQ @LV_BOOKID " 괄호 안에 있던 Carrid의 값을 검색조건으로 사용
+       ORDER BY PRIMARY KEY
+        INTO CORRESPONDING FIELDS OF @ER_ENTITY.
+       ENDSELECT.
+
+      ELSE . " LOOP 가 작동하지 않았을 때
+
+        SELECT *
+          FROM ZEA_MMT200
+         ORDER BY PRIMARY KEY
+          INTO CORRESPONDING FIELDS OF  @ER_ENTITY.
+        ENDSELECT.
+
+      ENDIF.
+
+    ENDMETHOD.
+
+
+  METHOD INVENTORYSET_GET_ENTITYSET.
+
+    DATA  : GT_T001W TYPE TABLE OF ZEA_T001W,
+            GS_T001W TYPE ZEA_T001W.
+    DATA ES_ENTITYSET TYPE ZEA_MMT200.
+
+*    SELECT * FROM ZEA_T001W AS B
+*          JOIN  ZEA_MMT200 AS A
+*            ON  A~PLANTTO EQ B~WERKS
+*
+*          JOIN ZEA_MMT020 AS C
+*            ON A~MATNR EQ C~MATNR
+*            AND C~SPRAS EQ @SY-LANGU
+*     INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+    " 항공사를 선택하면 해당 항공사의 항공편을 보여주기 위해
+    " CarrierSet의 Navigation Property를 통해서 ConnectionSet에 접근한다.
+
+    " URL : /CarrierSet('AA')/toConnection        " Key Fields가 1개인 경우
+    " URL : /CarrierSet(Carrid='AA')/toConnection " Key Fields가 1개인 경우
+    " URL : /CarrierSet(Carrid='AA',Key2='XX')/toConnection " Key Fields가 2개인 경우
+
+    " URL : /ConnectionSet => IT_KEY_TAB 에 한줄도 없음
+    DATA: LV_MOVID TYPE ZEA_MMT200-MOVID.
+    DATA: LV_BOOKID TYPE ZEA_MMT200-BOOKID.
+
+*    LOOP AT IT_KEY_TAB INTO DATA(LS_KEY). " 괄호 안의 값들을 점검
+*      CASE LS_KEY-NAME.
+*        WHEN 'Movid'.
+*          LV_MOVID = LS_KEY-VALUE.
+*        WHEN 'Bookid'.
+*          LV_BOOKID = LS_KEY-VALUE.
+*      ENDCASE.
+*    ENDLOOP.
+
+    DATA LV_PLANTFR TYPE ZEA_MMT200-PLANTFR.
+
+*    READ TABLE IT_FILTER_SELECT_OPTIONS INTO LS_FLITER INDEX 1 .
+    DATA LV_FILTER TYPE CHAR77.
+
+    LV_FILTER = IV_FILTER_STRING.
+
+    CONDENSE LV_FILTER NO-GAPS. "공백을 제거하고 왼쪽으로 정렬함.
+*결과값:    "(Plantfreq'application-synce17inventory4-display-component---Sub--10000')
+
+    LV_PLANTFR = LV_FILTER+66(5). "LV_PALNTFR 에 값 넣기 // 66자부터 5자리 가져오기
+
+
+    SELECT *
+      FROM ZEA_MMT200
+      WHERE PLANTFR EQ @LV_PLANTFR
+     ORDER BY PRIMARY KEY
+      INTO TABLE @ET_ENTITYSET.
+
+
+*    IF SY-SUBRC EQ 0. " LOOP 가 한번이라도 작동했을 때
+*      SELECT *
+*        FROM ZEA_MMT200
+*       WHERE MOVID EQ @LV_MOVID
+*        AND BOOKID EQ @LV_BOOKID " 괄호 안에 있던 Carrid의 값을 검색조건으로 사용
+*       ORDER BY PRIMARY KEY
+*        INTO TABLE @ET_ENTITYSET.
+*    ELSE. " LOOP 가 작동하지 않았을 때
+*      SELECT *
+*        FROM ZEA_MMT200
+*        WHERE PLANTFR EQ @LV_PLANTFR
+*       ORDER BY PRIMARY KEY
+*        INTO TABLE @ET_ENTITYSET.
+*    ENDIF.
+
+*--- 값 보정
+
+    SELECT * FROM ZEA_T001W INTO TABLE GT_T001W.
+
+*--- 시작 플랜트 값 넣어주기
+
+    LOOP AT ET_ENTITYSET INTO ES_ENTITYSET.
+
+*-- 플랜트 코드 => 플랜트명
+      READ TABLE GT_T001W INTO GS_T001W WITH KEY WERKS = ES_ENTITYSET-PLANTTO.
+
+      ES_ENTITYSET-PLANTTO = GS_T001W-PNAME1. "플랜트 코드를 플랜트명으로 바꿔줌.
+
+
+      MODIFY ET_ENTITYSET FROM ES_ENTITYSET TRANSPORTING PLANTTO.
+
+    ENDLOOP.
+
+*--- 모든 플랜트 값 넣기
+
+*    CLEAR GS_T001W.
+
+*    LOOP AT GT_T001W INTO GS_T001W.
+*      READ TABLE GT_T001W INTO GS_T001W WITH KEY WERKS = ES_ENTITYSET-PLANTFR.
+*      ES_ENTITYSET-PLANTFR = GS_T001W-WERKS.
+*      MODIFY ET_ENTITYSET FROM ES_ENTITYSET INDEX SY-TABIX TRANSPORTING PLANTFR.
+*
+*    ENDLOOP.
+
+
+  ENDMETHOD.
+
+
+  METHOD INVENTORYSET_UPDATE_ENTITY.
+**어떠한 데이터를 찾아서 그 데이터의 내용을 변경한다.
+**IT_KEY_TAB이 반드시 입력 되어야 함.
+** ㄴ 이유 : 변경할 대상을 지정해야 하므로,
+*
+*    READ TABLE IT_KEY_TAB INTO DATA(LS_KEY) INDEX 1.
+*
+*    DATA LV_MOVID TYPE ZEA_MMT200-MOVID. "Key Field 선택
+*    LV_MOVID = LS_KEY-VALUE. " ( )안의 키필드 값을 LV_BELNR에 보관
+*
+**    어떤 내용으로 변경하는지 가져옴
+**    HTTP Request Body 의 내용을 가져옴 (Key Field 를 기준으로 변경)
+*    CALL METHOD IO_DATA_PROVIDER->READ_ENTRY_DATA
+*      IMPORTING
+*        ES_DATA = ER_ENTITY.
+*
+**  CATCH /IWBEP/CX_MGW_TECH_EXCEPTION. " mgw technical exception
+**     그리고 이 때, 수정일자, 수정시간, 수정자에 대한 필드가 있다면 함께 작성
+*
+*    "키 값을 가진 ER_ENTITY
+*    "Database Table ZEA_MMT200 수정에 사용
+*      ER_ENTITY-AEDAT = SY-DATUM.
+*      ER_ENTITY-AENAM = SY-UNAME.
+*      ER_ENTITY-AEZET = SY-UZEIT.
+**      ER_ENTITY-STAUTS = 'X'.
+*
+*   DATA LS_MMT200 TYPE ZEA_MMT200.
+*
+*    MOVE-CORRESPONDING ER_ENTITY TO LS_MMT200 .
+*
+*    UPDATE ZEA_MMT200 FROM LS_MMT200. "UPDATE
+*
+*    IF  SY-SUBRC EQ 0.
+*      COMMIT WORK AND WAIT.
+*
+*      DATA: IS_HEAD TYPE ZEA_MMT090,
+*            IT_ITEM TYPE ZEA_MMY100.
+*
+*      CALL FUNCTION 'ZEA_MM_TRF'
+*        EXPORTING
+*          IV_PLANTFR  = ER_ENTITY-PLANTFR " 플랜트ID(시작)
+*          IV_PLANTTO  = ER_ENTITY-PLANTTO " 플랜트ID(도착)
+*          IV_MATNR    = ER_ENTITY-MATNR   " 자재코드
+*          IV_QUANTITY = ER_ENTITY-MENGE  " 이동 수량
+*        IMPORTING
+*          ES_HEAD     = IS_HEAD                 " [MM] 자재문서 Header
+*          ET_ITEM     = IT_ITEM.                 " 자재문서 ITEM 테이블타입
+*
+*      CALL FUNCTION 'ZEA_FI_WL'
+*        EXPORTING
+*          IS_HEAD = IS_HEAD   " [MM] 자재문서 Header
+*          IT_ITEM = IT_ITEM.   " 자재문서 ITEM 테이블타입
+*
+*    ELSE.
+*      CLEAR ER_ENTITY.
+*      "에러메세지
+*
+*    ENDIF.
+    DATA: LS_ENTITY TYPE ZEA_MMT200,
+          LT_ENTITY TYPE TABLE OF ZEA_MMT200.
+
+    DATA: LV_MOVID TYPE ZEA_MMT200-MOVID.
+    DATA: LV_BOOKID TYPE ZEA_MMT200-BOOKID.
+
+    LOOP AT IT_KEY_TAB INTO DATA(LS_KEY) . " 괄호 안의 값들을 점검
+      CASE LS_KEY-NAME.
+        WHEN 'Movid'.
+          LV_MOVID = LS_KEY-VALUE.
+        WHEN 'Bookid'.
+          LV_BOOKID = LS_KEY-VALUE.
+      ENDCASE.
+    ENDLOOP.
+
+*--- 선택한 라디오 버튼 값과 Plantfr 의 값이 일치하는 것만 필터링
+    DATA : LV_PLANTFR TYPE ZEA_MMT200-PLANTFR.
+
+* DATA : IT_FLITER_SELECT_OPTIONS LIKE TABLE OF IT_FILTER_SELECT_OPTIONS.
+
+
+
+    " Get data for update based on key fields
+    CALL METHOD IO_DATA_PROVIDER->READ_ENTRY_DATA
+      IMPORTING
+        ES_DATA = ER_ENTITY.
+
+    " Update additional fields if necessary (e.g., modification date, time, and user)
+*    ER_ENTITY-AEDAT = SY-DATUM.
+*    ER_ENTITY-AENAM = SY-UNAME.
+*    ER_ENTITY-AEZET = SY-UZEIT.
+
+    " Update database table using data from the entity
+*    CHECK ER_ENTITY-STATUS IS INITIAL.
+
+    UPDATE ZEA_MMT200 SET STATUS = ER_ENTITY-Status
+                          AEDAT = SY-DATUM
+                          AENAM = SY-UNAME
+                          AEZET = SY-UZEIT
+    WHERE MOVID = LV_MOVID AND BOOKID = LV_BOOKID.
+
+    IF SY-SUBRC EQ 0.
+      COMMIT WORK AND WAIT.
+
+      DATA: LS_HEAD TYPE ZEA_MMT090,
+            LT_ITEM TYPE ZEA_MMY100.
+
+      SELECT * FROM ZEA_MMT200 INTO TABLE LT_ENTITY.
+
+      READ TABLE LT_ENTITY INTO LS_ENTITY WITH KEY MOVID = ER_ENTITY-MOVID.
+
+      IF ER_ENTITY-STATUS EQ 'A'.
+        " Call function modules or methods to handle additional operations, e.g., creating FI documents
+        CALL FUNCTION 'ZEA_MM_TRF'
+          EXPORTING
+            IV_PLANTFR  = LS_ENTITY-PLANTFR
+            IV_PLANTTO  = LS_ENTITY-PLANTTO
+            IV_MATNR    = LS_ENTITY-MATNR
+            IV_QUANTITY = LS_ENTITY-MENGE
+          IMPORTING
+            ES_HEAD     = LS_HEAD
+            ET_ITEM     = LT_ITEM.
+
+        CALL FUNCTION 'ZEA_FI_WL'
+          EXPORTING
+            IS_HEAD = LS_HEAD
+            IT_ITEM = LT_ITEM.
+      ENDIF.
+
+    ELSE.
+      CLEAR LS_ENTITY.
+      " Handle error
+    ENDIF.
+
+
+  ENDMETHOD.
+
+
+  method PLANT_INVENTSET_GET_ENTITY.
+
+*    DATA: LS_ENTITY TYPE ZEA_MMT030,
+*          LT_ENTITY TYPE TABLE OF ZEA_MMT030.
+*
+*    DATA: LV_MATNR TYPE ZEA_MMT030-MATNR.
+*    DATA: LV_WERKS TYPE ZEA_MMT030-WERKS.
+*
+*    LOOP AT IT_KEY_TAB INTO DATA(LS_KEY) . " 괄호 안의 값들을 점검
+*      CASE LS_KEY-NAME.
+*        WHEN 'Matnr'.
+*          LV_MATNR = LS_KEY-VALUE.
+*        WHEN 'Werks'.
+*          LV_WERKS = LS_KEY-VALUE.
+*      ENDCASE.
+*    ENDLOOP.
+*
+**--- 선택한 라디오 버튼 값과 Plantfr 의 값이 일치하는 것만 필터링
+*  DATA : LV_PLANTFR TYPE ZEA_MMT200-PLANTFR.
+*
+*    " Get data for update based on key fields
+*    CALL METHOD IO_DATA_PROVIDER->READ_ENTRY_DATA
+*      IMPORTING
+*        ES_DATA = ER_ENTITY.
+*
+*    " Update database table using data from the entity
+*
+*    IF SY-SUBRC EQ 0.
+*      COMMIT WORK AND WAIT.
+*
+*      DATA: LS_HEAD TYPE ZEA_MMT090,
+*            LT_ITEM TYPE ZEA_MMY100.
+*
+*SELECT * FROM ZEA_MMT200 INTO TABLE LT_ENTITY.
+*
+*READ TABLE LT_ENTITY INTO LS_ENTITY WITH KEY MOVID = ER_ENTITY-MOVID.
+  endmethod.
+
+
+  method PLANT_INVENTSET_GET_ENTITYSET.
+*
+    DATA ES_ENTITYSET TYPE ZEA_MMT030.
+    DATA : LT_MMT020 TYPE TABLE OF ZEA_MMT020,
+          LS_MMS020 TYPE ZEA_MMT020.
+
+    DATA : LV_MATNR TYPE ZEA_MMT030-MATNR,
+           LV_WERKS TYPE ZEA_MMT030-WERKS.
+    DATA LV_PLANTFR TYPE ZEA_MMT030-WERKS.
+
+    DATA LV_FILTER TYPE CHAR77.
+
+    LV_FILTER = IV_FILTER_STRING.
+
+   CONDENSE LV_FILTER NO-GAPS. "공백을 제거하고 왼쪽으로 정렬함.
+   "결과값:    "(Plantfreq'application-synce17inventory4-display-component---Sub--10000')
+
+   LV_PLANTFR = LV_FILTER+64(5). "LV_PALNTFR 에 값 넣기 // 66자부터 5자리 가져오기
+
+
+      SELECT * FROM ZEA_MMT030
+        WHERE WERKS EQ @LV_PLANTFR
+       ORDER BY PRIMARY KEY
+        INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+
+
+  SELECT * FROM ZEA_MMT020 INTO TABLE LT_MMT020
+    WHERE SPRAS EQ SY-LANGU.
+
+  LOOP AT ET_ENTITYSET INTO ES_ENTITYSET .
+    READ TABLE LT_MMT020 INTO LS_MMS020 WITH KEY MATNR = ES_ENTITYSET-MATNR.
+
+    CONDENSE LS_MMS020-MATNR NO-GAPS.
+    ES_ENTITYSET-ERNAM = LS_MMS020-MATNR.
+   MODIFY ET_ENTITYSET FROM ES_ENTITYSET INDEX SY-TABIX.
+  ENDLOOP.
+
+
+  endmethod.
+
+
+  method PLANT_INVENTSET_UPDATE_ENTITY.
+**TRY.
+*CALL METHOD SUPER->PLANT_INVENTSET_UPDATE_ENTITY
+*  EXPORTING
+*    IV_ENTITY_NAME          =
+*    IV_ENTITY_SET_NAME      =
+*    IV_SOURCE_NAME          =
+*    IT_KEY_TAB              =
+**    IO_TECH_REQUEST_CONTEXT =
+*    IT_NAVIGATION_PATH      =
+**    IO_DATA_PROVIDER        =
+**  IMPORTING
+**    ER_ENTITY               =
+*    .
+**  CATCH /IWBEP/CX_MGW_BUSI_EXCEPTION.
+**  CATCH /IWBEP/CX_MGW_TECH_EXCEPTION.
+**ENDTRY.
+  endmethod.
+
+
+  method PLANT_INVENT_COU_GET_ENTITYSET.
+
+    DATA ES_ENTITYSET TYPE ZEA_MMT190.
+
+    DATA : LT_MMT020 TYPE TABLE OF ZEA_MMT020,
+          LS_MMS020 TYPE ZEA_MMT020.
+
+    DATA : LV_MATNR TYPE ZEA_MMT190-MATNR,
+           LV_WERKS TYPE ZEA_MMT190-WERKS.
+    DATA LV_PLANTFR TYPE ZEA_MMT190-WERKS.
+
+    DATA LV_FILTER TYPE CHAR77.
+    DATA LV_MAKTX TYPE ZEA_MMT020-MAKTX.
+
+    LV_FILTER = IV_FILTER_STRING.
+
+   CONDENSE LV_FILTER NO-GAPS. "공백을 제거하고 왼쪽으로 정렬함.
+   "결과값:    "(Plantfreq'application-synce17inventory4-display-component---Sub--10000')
+
+   LV_PLANTFR = LV_FILTER+64(5). "LV_PALNTFR 에 값 넣기 // 66자부터 5자리 가져오기
+
+
+*    IF SY-SUBRC EQ 0. " LOOP 가 한번이라도 작동했을 때
+      SELECT * FROM ZEA_MMT190
+        WHERE WERKS EQ @LV_PLANTFR
+       ORDER BY PRIMARY KEY
+        INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+
+* //////// 값 보정 (자재명 넣기)
+          SELECT * FROM ZEA_MMT020 INTO TABLE LT_MMT020
+            WHERE SPRAS EQ SY-LANGU.
+
+  LOOP AT ET_ENTITYSET INTO ES_ENTITYSET .
+    READ TABLE LT_MMT020 INTO LS_MMS020 WITH KEY MATNR = ES_ENTITYSET-MATNR.
+
+     LV_MAKTX = LS_MMS020-MAKTX.
+
+     ES_ENTITYSET-ERNAM = LS_MMS020-MAKTX.
+     ES_ENTITYSET-AENAM = LV_MAKTX+12(5).
+
+   MODIFY ET_ENTITYSET FROM ES_ENTITYSET TRANSPORTING ERNAM AENAM ."INDEX SY-TABIX.
+  ENDLOOP.
+
+  endmethod.
+ENDCLASS.

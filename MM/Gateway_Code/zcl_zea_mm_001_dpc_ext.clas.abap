@@ -1,0 +1,49 @@
+class ZCL_ZEA_MM_001_DPC_EXT definition
+  public
+  inheriting from ZCL_ZEA_MM_001_DPC
+  create public .
+
+public section.
+protected section.
+
+  methods STOCKSET_GET_ENTITYSET
+    redefinition .
+  methods MMS010SET_GET_ENTITYSET
+    redefinition .
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ZEA_MM_001_DPC_EXT IMPLEMENTATION.
+
+
+  method MMS010SET_GET_ENTITYSET.
+  SELECT *
+    FROM ZEA_MMT190 AS A LEFT JOIN ZEA_T001W AS B ON A~WERKS EQ B~WERKS
+                         LEFT JOIN ZEA_MMT020 AS C ON A~MATNR EQ C~MATNR
+                                                  AND C~SPRAS EQ @SY-LANGU
+    INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET
+    WHERE A~WERKS BETWEEN '10002' AND '10009'.
+*    AND A~MATNR BETWEEN '30000000'.
+
+    SORT ET_ENTITYSET BY WERKS MATNR.
+  endmethod.
+
+
+  method STOCKSET_GET_ENTITYSET.
+
+  SELECT MATNR,
+         WERKS,
+         SCODE,
+         CALQTY,
+         MEINS
+    FROM ZEA_MMT190
+    WHERE WERKS BETWEEN '10002' AND '10009'
+      AND MATNR BETWEEN '30000000' AND '30000023'
+    INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+    SORT ET_ENTITYSET BY WERKS MATNR.
+
+  endmethod.
+ENDCLASS.

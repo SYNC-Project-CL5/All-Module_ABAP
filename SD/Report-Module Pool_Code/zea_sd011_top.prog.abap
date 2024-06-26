@@ -1,0 +1,214 @@
+*&---------------------------------------------------------------------*
+*& Include          YE12_PJ020_TOP
+*&---------------------------------------------------------------------*
+
+TABLES: ZEA_SDT020, ZEA_SDT030, ZEA_T001W, ZEA_MMT010, ZEA_MMT020,
+        ZEA_SDT090.
+
+* 첫번째 ALV에 출력할 데이터를 보관하는 Internal Table
+DATA: BEGIN OF GS_DATA,
+        SAPNR   TYPE ZEA_SDT020-SAPNR,
+        SP_YEAR TYPE ZEA_SDT020-SP_YEAR,
+        WERKS   TYPE ZEA_SDT020-WERKS,
+        PNAME1  TYPE ZEA_T001W-PNAME1, " 플랜트명 새로 추가.
+        SAPQU   TYPE ZEA_SDT020-SAPQU,
+        MEINS   TYPE ZEA_SDT020-MEINS,
+        TOTREV  TYPE ZEA_SDT020-TOTREV,
+        WAERS   TYPE ZEA_SDT020-WAERS,
+        LOEKZ   TYPE ZEA_SDT020-LOEKZ,
+        ERNAM   TYPE ZEA_SDT020-ERNAM,
+        ERDAT   TYPE ZEA_SDT020-ERDAT,
+        ERZET   TYPE ZEA_SDT020-ERZET,
+        AENAM   TYPE ZEA_SDT020-AENAM,
+        AEDAT   TYPE ZEA_SDT020-AEDAT,
+        AEZET   TYPE ZEA_SDT020-AEZET,
+      END OF GS_DATA.
+DATA: GT_DATA LIKE TABLE OF GS_DATA.
+
+* 두번째 ALV에 출력할 데이터를 보관하는 Internal Table
+DATA: BEGIN OF GS_DATA2,
+        SAPNR   TYPE ZEA_SDT030-SAPNR,
+        SP_YEAR TYPE ZEA_SDT030-SP_YEAR,
+        POSNR   TYPE ZEA_SDT030-POSNR,
+        WERKS   TYPE ZEA_SDT030-WERKS,
+        PNAME1  TYPE ZEA_T001W-PNAME1, " 플랜트명 새로 추가.
+        MATNR   TYPE ZEA_SDT030-MATNR,
+        MAKTX   TYPE ZEA_MMT020-MAKTX,
+        SAPQU   TYPE ZEA_SDT030-SAPQU,
+        MEINS   TYPE ZEA_SDT030-MEINS,
+        NETPR   TYPE ZEA_SDT030-NETPR,
+        WAERS   TYPE ZEA_SDT030-WAERS,
+        VALID_EN TYPE ZEA_SDT090-VALID_EN, " 단가유효종료일
+        SPQTY1  TYPE ZEA_SDT030-SPQTY1,
+        SPQTY2  TYPE ZEA_SDT030-SPQTY2,
+        SPQTY3  TYPE ZEA_SDT030-SPQTY3,
+        SPQTY4  TYPE ZEA_SDT030-SPQTY4,
+        SPQTY5  TYPE ZEA_SDT030-SPQTY5,
+        SPQTY6  TYPE ZEA_SDT030-SPQTY6,
+        SPQTY7  TYPE ZEA_SDT030-SPQTY7,
+        SPQTY8  TYPE ZEA_SDT030-SPQTY8,
+        SPQTY9  TYPE ZEA_SDT030-SPQTY9,
+        SPQTY10 TYPE ZEA_SDT030-SPQTY10,
+        SPQTY11 TYPE ZEA_SDT030-SPQTY11,
+        SPQTY12 TYPE ZEA_SDT030-SPQTY12,
+        STATUS2 TYPE ZEA_SDT030-STATUS2,
+        LOEKZ   TYPE ZEA_SDT030-LOEKZ,
+        ERNAM   TYPE ZEA_SDT020-ERNAM,
+        ERDAT   TYPE ZEA_SDT020-ERDAT,
+        ERZET   TYPE ZEA_SDT020-ERZET,
+        AENAM   TYPE ZEA_SDT020-AENAM,
+        AEDAT   TYPE ZEA_SDT020-AEDAT,
+        AEZET   TYPE ZEA_SDT020-AEZET,
+      END OF GS_DATA2.
+DATA: GT_DATA2 LIKE TABLE OF GS_DATA2.
+
+
+DATA: BEGIN OF GS_DISPLAY.
+        INCLUDE STRUCTURE GS_DATA.
+DATA:   STATUS LIKE ICON-ID, " 아이콘
+        COLOR           TYPE C LENGTH 4, " 행 색상 정보
+*        LIGHT           TYPE C,          " 신호등 표시를 위한
+*        " EXCEPTION 필드
+*        " 0:비움 1:빨강 2:노랑 3:초록
+*        IT_FIELD_COLORS TYPE LVC_T_SCOL, " 셀 별 색상정보 인터널 테이블
+*        STYLE           TYPE LVC_T_STYL, " 셀 스타일(모양)
+*        MARK            TYPE CHAR1,      " 셀의 마킹 정보
+      END OF GS_DISPLAY.
+
+DATA: GT_DISPLAY LIKE TABLE OF GS_DISPLAY.
+
+*DATA GS_DISPLAY LIKE LINE OF GT_DATA.
+*DATA: GT_DISPLAY LIKE TABLE OF GS_DISPLAY.
+
+
+DATA: BEGIN OF GS_DISPLAY2.
+        INCLUDE STRUCTURE GS_DATA2.
+DATA:   STATUS LIKE ICON-ID, " 아이콘
+        COLOR           TYPE C LENGTH 4, " 행 색상 정보
+*        LIGHT           TYPE C,          " 신호등 표시를 위한
+*        " EXCEPTION 필드
+*        " 0:비움 1:빨강 2:노랑 3:초록
+*        IT_FIELD_COLORS TYPE LVC_T_SCOL, " 셀 별 색상정보 인터널 테이블
+*        STYLE           TYPE LVC_T_STYL, " 셀 스타일(모양)
+*        MARK            TYPE CHAR1,      " 셀의 마킹 정보
+      END OF GS_DISPLAY2.
+
+DATA: GT_DISPLAY2 LIKE TABLE OF GS_DISPLAY2.
+
+
+DATA: BEGIN OF GS_DISPLAY3.
+        INCLUDE STRUCTURE ZEA_SDT030.
+DATA: END OF GS_DISPLAY3,
+GT_DISPLAY3 LIKE TABLE OF GS_DISPLAY3.
+
+
+* 검색결과를 보관할 변수
+DATA: GT_SDT020 TYPE TABLE OF ZEA_SDT020,   " Internal Table
+      GS_SDT020 LIKE LINE OF GT_SDT020. " Work Area
+
+
+DATA: GO_CONTAINER TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_ALV_GRID  TYPE REF TO CL_GUI_ALV_GRID,
+      GO_CONTAINER2 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_ALV_GRID2  TYPE REF TO CL_GUI_ALV_GRID,
+      GO_CONTAINER3 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_ALV_GRID3  TYPE REF TO CL_GUI_ALV_GRID.
+*      GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+
+DATA: GS_VARIANT    TYPE DISVARIANT,
+      GV_SAVE       TYPE C,
+      GS_VARIANT2 TYPE DISVARIANT,
+      GV_SAVE2    TYPE C,
+
+      GT_FIELDCAT   TYPE LVC_T_FCAT,
+      GS_FIELDCAT   TYPE LVC_S_FCAT,
+*      GT_FIELDCAT3   TYPE LVC_T_FCAT,
+*      GS_FIELDCAT3   TYPE LVC_S_FCAT,
+
+      GS_LAYOUT     TYPE LVC_S_LAYO,
+      GS_LAYOUT2     TYPE LVC_S_LAYO,
+      GS_LAYOUT3     TYPE LVC_S_LAYO,
+
+      GT_FILTER     TYPE LVC_T_FILT,
+      GS_FILTER     TYPE LVC_S_FILT,
+
+      GT_INDEX_ROWS TYPE LVC_T_ROW,
+      GS_INDEX_ROWS TYPE LVC_S_ROW,
+
+      GT_TOOLBAR    TYPE UI_FUNCTIONS,
+
+      GT_F4         TYPE LVC_T_F4,
+      GS_F4         TYPE LVC_S_F4,
+
+      OK_CODE       TYPE SY-UCOMM,
+      GV_LINES      TYPE SY-TFILL,
+      GV_ANSWER     TYPE CHAR1,
+      GV_CHANGED    TYPE CHAR1,
+      GV_SCR_ON     TYPE CHAR1,
+
+      GV_TITLE1     TYPE LVC_TITLE,
+      GV_TITLE2     TYPE LVC_TITLE.
+
+
+* 판매운영계획ID 채번에 사용
+DATA: BEGIN OF GS_CHECK,
+        SAPNR   TYPE ZEA_SDT020-SAPNR,
+        SP_YEAR TYPE ZEA_SDT020-SP_YEAR,
+        WERKS   TYPE ZEA_SDT020-WERKS,
+      END OF GS_CHECK.
+DATA GT_CHECK LIKE TABLE OF GS_CHECK.
+
+
+DATA: BEGIN OF GS_PNAME,
+        WERKS  TYPE ZEA_T001W-WERKS,
+        PNAME1 TYPE ZEA_T001W-PNAME1,
+      END OF GS_PNAME.
+DATA GT_PNAME LIKE TABLE OF GS_PNAME.
+
+*--------------------------------------------------------------------*
+* 선택된 헤더 행정보 띄워주기 위한 변수
+DATA: BEGIN OF GS_SDT020_2.
+        INCLUDE STRUCTURE GS_DISPLAY.
+DATA:
+      END OF GS_SDT020_2.
+DATA: GT_SDT020_2 LIKE TABLE OF GS_SDT020_2.
+
+
+*** 화면과 연동될 제어변수
+DATA GV_MODE1 TYPE C.
+
+*--------------------------------------------------------------------*
+* 드롭다운 리스트 사용
+
+*ListBox 변수 선언
+DATA: GV_LIST TYPE CHAR50,
+      GV_LIST_TEXT TYPE CHAR50,
+      GT_LIST TYPE TABLE OF ZEA_T001W,
+      GS_LIST LIKE LINE OF GT_LIST.
+
+
+*리스트 박스 구현
+DATA: LIST  TYPE VRM_VALUES,
+      VALUE LIKE LINE OF LIST.
+
+*----------------------------------------------------------------------*
+* Confirm Pop-Up
+*----------------------------------------------------------------------*
+* _mc_confirm '수입신고 의뢰' '저장하시겠습니까?' gv_answer.
+*----------------------------------------------------------------------*
+DEFINE _MC_POPUP_CONFIRM.
+  CALL FUNCTION 'POPUP_TO_CONFIRM'
+    EXPORTING
+      TITLEBAR              = &1
+*      DISPLAY_CANCEL_BUTTON = ''
+      TEXT_QUESTION         = &2
+      TEXT_BUTTON_1         = 'YES'
+      ICON_BUTTON_1         = '@2K@'
+      TEXT_BUTTON_2         = 'NO'
+      ICON_BUTTON_2         = '@2O@ '
+    IMPORTING
+      ANSWER                = &3
+    EXCEPTIONS
+      TEXT_NOT_FOUND        = 1
+      OTHERS                = 2.
+END-OF-DEFINITION.

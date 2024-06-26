@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] 전표번호 자동채번 함수</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_BELNR_NRTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_BELNR_NR</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_BELNR_NR</FUNCNAME>
+     <SHORT_TEXT>[FI] 전표번호 자동채번 함수</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_NUMBER</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BELNR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>EV_NUMBER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표번호</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

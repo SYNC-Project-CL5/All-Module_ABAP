@@ -1,0 +1,74 @@
+class ZCL_ZEA_AFRU_DPC_EXT definition
+  public
+  inheriting from ZCL_ZEA_AFRU_DPC
+  create public .
+
+public section.
+protected section.
+
+  methods AFRUSET_GET_ENTITYSET
+    redefinition .
+  methods FIGURESSET_GET_ENTITYSET
+    redefinition .
+  methods AFRUSET_GET_ENTITY
+    redefinition .
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ZEA_AFRU_DPC_EXT IMPLEMENTATION.
+
+
+  method AFRUSET_GET_ENTITY.
+
+
+* IT_KEY_TAB 은 EntitySet 의 ( ) 안의 값을 가지고 있다.
+    DATA LS_KEY LIKE LINE OF IT_KEY_TAB.
+    READ TABLE IT_KEY_TAB INTO LS_KEY INDEX 1.
+*    READ TABLE IT_KEY_TAB INTO DATA(LS_KEY) INDEX 1.
+
+    DATA LV_AUFNR TYPE ZEA_AFRU-AUFNR.
+*    IF LS_KEY-NAME EQ 'Carrid'. " 어차피 키필드가 하나라서 비교할 필요가 없다.
+    LV_AUFNR = LS_KEY-VALUE.
+*    ENDIF.
+
+* 한 줄을 검색하기 위한 조건이 필요함
+    SELECT SINGLE *
+      FROM ZEA_AFRU AS A
+      jOIN ZEA_MMT020 AS B
+             ON B~MATNR EQ A~MATNR
+     INTO CORRESPONDING FIELDS OF ER_ENTITY
+     WHERE A~AUFNR EQ LV_AUFNR.
+
+  endmethod.
+
+
+  METHOD AFRUSET_GET_ENTITYSET.
+
+    SELECT
+      FROM ZEA_AFRU AS A
+      JOIN ZEA_MMT020 AS B
+      ON B~MATNR EQ A~MATNR
+      FIELDS *
+      INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+      SORT ET_ENTITYSET BY MATNR.
+
+  ENDMETHOD.
+
+
+  METHOD FIGURESSET_GET_ENTITYSET.
+
+    SELECT
+      FROM ZEA_AFRU AS A
+      LEFT JOIN ZEA_MMT020 AS B
+      ON B~MATNR EQ A~MATNR
+      AND B~SPRAS EQ @SY-LANGU
+      FIELDS *
+      INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+    SORT ET_ENTITYSET BY MATNR.
+
+  ENDMETHOD.
+ENDCLASS.

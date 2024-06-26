@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_NROB" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <ATTRIBUTES>
+    <OBJECT>ZEA_PAYNR</OBJECT>
+    <DOMLEN>CHAR10</DOMLEN>
+    <PERCENTAGE>5.0</PERCENTAGE>
+    <NOIVBUFFER>00000010</NOIVBUFFER>
+   </ATTRIBUTES>
+   <TEXT>
+    <LANGU>E</LANGU>
+    <OBJECT>ZEA_PAYNR</OBJECT>
+    <TXT>대금 청구 문서 번호 채번</TXT>
+    <TXTSHORT>청구 문서 번호 채번</TXTSHORT>
+   </TEXT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

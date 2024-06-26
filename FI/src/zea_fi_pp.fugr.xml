@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] PP 모듈  자동함수 생성</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_FI_PPF01</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_FI_PPTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_FI_PP</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_FI_PP</FUNCNAME>
+     <SHORT_TEXT>[FI] PP모듈 WE 지동함수</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MATNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_FNPD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_FNPD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_AUFNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PDBAN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_PDBAN</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_TSDAT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_TSDAT</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BELNR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_MATNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>최종생산품 (완제품 코드)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_FNPD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>최종생산품 (수량)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_AUFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>생산오더 ID</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PDBAN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>폐기량 (검수불합격 수량)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_TSDAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>생산 검수일자 (증빙일자)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표 번호</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

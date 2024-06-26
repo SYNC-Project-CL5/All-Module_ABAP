@@ -1,0 +1,3 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/Device","sync/ea/price/model/models"],function(e,i,t){"use strict";return e.extend("sync.ea.price.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.getRoute+
+r().initialize();this.setModel(t.createDeviceModel(),"device")}})});                                                                                                                                                                                           
+//# sourceMappingURL=Component.js.map                                                                                                                                                                                                                          

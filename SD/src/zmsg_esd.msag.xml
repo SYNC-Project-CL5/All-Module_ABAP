@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZMSG_ESD</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message Class</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp; &amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>001</MSGNR>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>&amp; 건의 데이터가 검색되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>해당 조건의 데이터가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>데이터가 성공적으로 저장되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>데이터 저장 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>020</MSGNR>
+     <TEXT>Custom Container 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>021</MSGNR>
+     <TEXT>ALV Grid 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>Field Catalog 생성 및 변환 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_ESD</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>ALV Grid 에 데이터를 전달하는 중 오류가 발생했습니다.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

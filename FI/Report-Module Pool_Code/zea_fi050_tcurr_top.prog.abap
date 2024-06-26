@@ -1,0 +1,90 @@
+*&---------------------------------------------------------------------*
+*& Include          ZEA_FI050_TUCRR_TOP
+*&---------------------------------------------------------------------*
+
+TABLES: ZEA_TCURR.
+*DATA: GT_TCURR TYPE TABLE OF ZEA_TCURR,
+*      GS_TCURR TYPE ZEA_TCURR.
+
+DATA: BEGIN OF GS_TCURR.
+        INCLUDE STRUCTURE ZEA_TCURR.
+DATA:   AVERAGE TYPE ZEA_TCURR-UKURS,
+      END OF GS_TCURR,
+      GT_TCURR LIKE TABLE OF GS_TCURR.
+
+* -- 화면 출력 DATA : GT_DISPLAY
+DATA: BEGIN OF GS_DISPLAY.
+        INCLUDE STRUCTURE ZEA_TCURR.
+DATA:   AVERAGE TYPE ZEA_TCURR-UKURS,
+        STATUS  TYPE ICON-ID,
+      END OF GS_DISPLAY,
+      GT_DISPLAY LIKE TABLE OF GS_DISPLAY.
+
+*type pool declarations for graphical frame work
+TYPE-POOLS: GFW.
+
+*OK code declaration
+DATA: OK_CODE TYPE SY-UCOMM.
+
+*structure declaration for ALV Cont 1 values
+TYPES : BEGIN OF TY_GRVALWA1.
+          INCLUDE STRUCTURE GPRVAL.
+TYPES : END OF TY_GRVALWA1.
+
+
+*structure declaration for ALV Cont 1 column names
+TYPES : BEGIN OF TY_COL1_TEXTS.
+          INCLUDE STRUCTURE GPRTXT.
+TYPES : END OF TY_COL1_TEXTS.
+
+*data declarations for ALV Cont 1
+DATA : GRVAL1     TYPE STANDARD TABLE OF TY_GRVALWA1,
+       GRVALWA1   TYPE TY_GRVALWA1,
+       COL1_TEXTS TYPE STANDARD TABLE OF TY_COL1_TEXTS,
+       COL1_WA    TYPE TY_COL1_TEXTS.
+
+*structure declaration for Graph Cont 2 values
+TYPES : BEGIN OF TY_GRVALWA2.
+          INCLUDE STRUCTURE GPRVAL.
+TYPES : END OF TY_GRVALWA2.
+
+*structure declaration for Graph Cont 2 column names
+TYPES : BEGIN OF TY_COL2_TEXTS.
+          INCLUDE STRUCTURE GPRTXT.
+TYPES : END OF TY_COL2_TEXTS.
+
+*data declarations for graph2
+DATA : GRVAL2     TYPE STANDARD TABLE OF TY_GRVALWA2,
+       GRVALWA2   TYPE TY_GRVALWA2,
+       COL2_TEXTS TYPE STANDARD TABLE OF TY_COL2_TEXTS,
+       COL2_WA    TYPE TY_COL2_TEXTS.
+
+*data declarations for containers,splitters,and custom container
+DATA :
+*      CUSTOM_CONTAINER TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+*      SPLITTER         TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+  CCON1 TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+  CCON2 TYPE REF TO CL_GUI_CUSTOM_CONTAINER.
+
+* ALV  display - Cont 1
+DATA: GO_ALV_GRID      TYPE REF TO CL_GUI_ALV_GRID.
+
+
+* -- ALV 관련변수
+DATA: GS_LAYOUT   TYPE LVC_S_LAYO,
+      GT_FIELDCAT TYPE LVC_T_FCAT,
+      GS_FIELDCAT TYPE LVC_S_FCAT,
+      GS_SORT     TYPE LVC_S_SORT,
+      GT_SORT     TYPE LVC_T_SORT,
+      GS_VARIANT  TYPE DISVARIANT,
+      GV_SAVE     TYPE C.
+
+* -- 150번 화면변수 --------------------
+DATA: BEGIN OF S0150.
+        INCLUDE STRUCTURE GS_TCURR.
+DATA:
+        INPUT_USD  TYPE ZEA_BSEG-DMBTR,
+        OUTPUT_KRW TYPE ZEA_BSEG-DMBTR,
+        OUTPUT_DIF TYPE ZEA_BSEG-DMBTR,
+      END OF S0150.
+DATA: STATUS TYPE C LENGTH 132." Status Icon은 항상 길이가 문자 132

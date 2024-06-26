@@ -1,0 +1,2 @@
+{"version":3,"file":"View1.controller.js","names":["sap","ui","define","Controller","extend","onInit","this","_createVizFrame","oVizFrame","getView","byId","setVizProperties","title","visible","text"],"sources":["View1-dbg.controller.js"],"mappings":"AAA+
+AA,IAAIC,GAAGC,OAAO,CACV,6BACJ,gCACA,oCACA,8CAKA,SAAUC,GAAa,aAEnB,OAAOA,EAAWC,OAAO,oCAAqC,CAC1DC,OAAQ,WAEJC,KAAKC,iBAET,EAEAA,gBAAiB,WACb,IAAIC,EAAYF,KAAKG,UAAUC,KAAK,cAGpCF,EAAUG,iBAAiB,CACvBC,MAAO,CACHC,QAAS,KACTC,KAAM,SAItB,GACJ","ignoreList":[]}      

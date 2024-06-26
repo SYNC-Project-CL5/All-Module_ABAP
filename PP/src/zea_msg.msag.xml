@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZEA_MSG</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message Class</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp; &amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>최소 한 행이상 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>&amp; 건의 데이터가 검색되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>해당 조건의 데이터가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>데이터가 성공적으로 저장되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>데이터 저장 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>020</MSGNR>
+     <TEXT>Custom Container 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>021</MSGNR>
+     <TEXT>ALV Grid 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>Field Catalog 생성 및 변환 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>ALV Grid 에 데이터를 전달하는 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>024</MSGNR>
+     <TEXT>TREE 객체 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>025</MSGNR>
+     <TEXT>TREE NODE 생성 중 오류가 발생했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>026</MSGNR>
+     <TEXT>올바른 사원코드를 입력해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>027</MSGNR>
+     <TEXT>올바른 자재코드를 선택해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>030</MSGNR>
+     <TEXT>SD 시작 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>031</MSGNR>
+     <TEXT>&amp; 출고문서가 생성되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>032</MSGNR>
+     <TEXT>이미 생성된 출고문서입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>033</MSGNR>
+     <TEXT>판매오더를 생성할 고객코드를 입력해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>034</MSGNR>
+     <TEXT>이미 생성된 판매운영계획입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>035</MSGNR>
+     <TEXT>이미 생성된 청구 문서입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>036</MSGNR>
+     <TEXT>해당 고객을 찾을 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>037</MSGNR>
+     <TEXT>재고가 부족합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>038</MSGNR>
+     <TEXT>출고 예정일을 어제 날짜 이후로 설정하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>039</MSGNR>
+     <TEXT>여신 현황을 조회할 고객코드를 입력해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>040</MSGNR>
+     <TEXT>재고수량을 초과하는 구매는 불가합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>045</MSGNR>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>049</MSGNR>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>050</MSGNR>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>055</MSGNR>
+     <TEXT>SD 종료 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>060</MSGNR>
+     <TEXT>PP 시작 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>061</MSGNR>
+     <TEXT>최소 한 행이상 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>062</MSGNR>
+     <TEXT>이미 생성된 생산계획 번호입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>063</MSGNR>
+     <TEXT>한건 초과의 판매계획을 추가할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>064</MSGNR>
+     <TEXT>검수가 완료되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>065</MSGNR>
+     <TEXT>결재가 완료되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>066</MSGNR>
+     <TEXT>폐기사유가 저장되었습니다. 결재를 수행해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>067</MSGNR>
+     <TEXT>미결재 건입니다. 결재를 진행해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>068</MSGNR>
+     <TEXT>선택된 검수 건이 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>069</MSGNR>
+     <TEXT>폐기수량이 생산수량보다 큽니다. 옳바른 값을 입력해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>070</MSGNR>
+     <TEXT>검수가 진행되지 않은 실적입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>071</MSGNR>
+     <TEXT>입고신청이 완료되었습니다. 생성된 배치번호는 &amp; 입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>072</MSGNR>
+     <TEXT>자재소요량 계산은 10000번 플랜트(생산공장)에서만 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>073</MSGNR>
+     <TEXT>보유 수량보다 입력한 수량이 많습니다. 올바른 값을 입력해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>074</MSGNR>
+     <TEXT>입고지 또는 올바른 수량을 선택해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>075</MSGNR>
+     <TEXT>계산월을 한 열 선택해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>076</MSGNR>
+     <TEXT>생산계획은 판매년도 또는 1000번 회사코드에서만 수립할 수 있습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>077</MSGNR>
+     <TEXT>다음달 &amp;년 &amp;월인 열을 선택하고 진행해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>078</MSGNR>
+     <TEXT>생산계획 &amp;가 생성되었습니다. INDEX는 &amp;입니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>079</MSGNR>
+     <TEXT>검수일자는 금일만 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>080</MSGNR>
+     <TEXT>계획일자를 &amp;년 &amp; 월로 잡아주세요</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>081</MSGNR>
+     <TEXT>&amp;개의 재고이전이 완료되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>085</MSGNR>
+     <TEXT>PP 종료 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>090</MSGNR>
+     <TEXT>MM 시작 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>091</MSGNR>
+     <TEXT>&amp; 건의 자재가 검색되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>115</MSGNR>
+     <TEXT>MM 종료 공간 (지우고 사용)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>120</MSGNR>
+     <TEXT>분리 컨테이너 생성에 실패했습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>121</MSGNR>
+     <TEXT>월 별 데이터를 선택해주세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>122</MSGNR>
+     <TEXT>동일한 데이터가 존재합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>123</MSGNR>
+     <TEXT>&amp; 전표가 1000번 회사 코드에 전기되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZEA_MSG</ARBGB>
+     <MSGNR>145</MSGNR>
+     <TEXT>FI 종료 공간 (지우고 사용)</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

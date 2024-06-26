@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZEA_BSTXT</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZEA_TEXT50</DOMNAME>
+    <HEADLEN>10</HEADLEN>
+    <SCRLEN1>05</SCRLEN1>
+    <SCRLEN2>10</SCRLEN2>
+    <SCRLEN3>10</SCRLEN3>
+    <DDTEXT>전기키 설명(Text)</DDTEXT>
+    <REPTEXT>전기키 설명</REPTEXT>
+    <SCRTEXT_S>전기키</SCRTEXT_S>
+    <SCRTEXT_M>전기키 설명</SCRTEXT_M>
+    <SCRTEXT_L>전기키 설명</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

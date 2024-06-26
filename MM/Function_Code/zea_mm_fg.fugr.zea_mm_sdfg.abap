@@ -1,0 +1,74 @@
+FUNCTION ZEA_MM_SDFG.
+*"----------------------------------------------------------------------
+
+ "SD 출하문서는 납품예정일, 플랜트 기준으로 동일 문서번호로 1:N
+ "MM 출고문서는 모두 개별 처리
+  IF IV_SBELNR IS INITIAL OR
+     IV_POSNR  IS INITIAL.
+    EV_RETURN = 'E'.
+    RETURN.
+  ENDIF.
+
+ "출하 데이터 Select
+  CLEAR: GT_SDT060[].
+  SELECT * INTO CORRESPONDING FIELDS OF TABLE @GT_SDT060
+           FROM ZEA_SDT060 AS A
+           WHERE SBELNR EQ @IV_SBELNR.
+  IF SY-SUBRC NE 0.
+    EV_RETURN = 'E'.
+    RETURN.
+  ELSE.
+    CLEAR: GT_SDT110[].
+    SELECT * INTO CORRESPONDING FIELDS OF TABLE @GT_SDT110
+             FROM ZEA_SDT110 AS A
+                  FOR ALL ENTRIES IN @GT_SDT060
+             WHERE SBELNR EQ @GT_SDT060-SBELNR
+             AND   POSNR  EQ @IV_POSNR.
+
+  ENDIF.
+
+  CLEAR: GT_MMT090[], GT_MMT100[].
+  CLEAR: ZEA_MMT090-MBLNR.
+
+  LOOP  AT  GT_SDT060  INTO  GS_SDT060.
+
+        PERFORM MAKE_MBLNR_HEADER_DATA_SD TABLES GT_MMT090
+                                          USING GS_SDT060
+                                          CHANGING ZEA_MMT090-MBLNR.
+
+        LOOP  AT  GT_SDT110  INTO  GS_SDT110
+                             WHERE  SBELNR  EQ  GS_SDT060-SBELNR.
+
+              PERFORM MAKE_MBLNR_ITEM_DATA_SD TABLES GT_MMT100
+                                              USING  GS_SDT110
+                                                     ZEA_MMT090-MBLNR.
+
+        ENDLOOP.
+
+  ENDLOOP.
+
+*BREAK-POINT.
+  IF GT_MMT090[] IS NOT INITIAL.
+    INSERT ZEA_MMT090 FROM TABLE GT_MMT090 ACCEPTING DUPLICATE KEYS.
+    IF SY-SUBRC NE 0.
+      ROLLBACK WORK.
+    ENDIF.
+  ENDIF.
+
+  IF GT_MMT100[] IS NOT INITIAL.
+    INSERT ZEA_MMT100 FROM TABLE GT_MMT100 ACCEPTING DUPLICATE KEYS.
+    IF SY-SUBRC NE 0.
+      ROLLBACK WORK.
+    ENDIF.
+  ENDIF.
+
+DATA: LS_MMT090 TYPE ZEA_MMT090.
+ LOOP AT GT_MMT090 INTO LS_MMT090.
+   ES_HEAD = GT_MMT090.
+ ENDLOOP.
+
+ ET_ITEM = GT_MMT100[].
+
+  EV_RETURN = 'S'.
+
+ENDFUNCTION.

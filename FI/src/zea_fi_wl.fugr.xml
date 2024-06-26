@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] MM모듈 WL(자재이동) 자동함수 생성</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_FI_WLF01</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_FI_WLTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_FI_WL</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_FI_WL</FUNCNAME>
+     <SHORT_TEXT>[FI] MM모듈 WL 자동함수 생성</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMT090</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_MMY100</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BSEG-BELNR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IS_HEAD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[MM] 자재문서 Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ITEM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>자재문서 ITEM 테이블타입</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표번호</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

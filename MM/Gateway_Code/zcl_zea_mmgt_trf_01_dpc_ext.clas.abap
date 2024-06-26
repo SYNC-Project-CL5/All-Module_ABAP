@@ -1,0 +1,69 @@
+class ZCL_ZEA_MMGT_TRF_01_DPC_EXT definition
+  public
+  inheriting from ZCL_ZEA_MMGT_TRF_01_DPC
+  create public .
+
+public section.
+protected section.
+
+  methods STORAGESET_GET_ENTITYSET
+    redefinition .
+  methods BOOKINGSET_GET_ENTITYSET
+    redefinition .
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ZEA_MMGT_TRF_01_DPC_EXT IMPLEMENTATION.
+
+
+  method BOOKINGSET_GET_ENTITYSET.
+
+  SELECT *
+    FROM ZEA_SDT080
+*    ORDER BY PRIMARY KEY
+    INTO TABLE @ET_ENTITYSET.
+
+  endmethod.
+
+
+  METHOD STORAGESET_GET_ENTITYSET.
+
+*    DATA: LV_BOOKID TYPE ZEA_SDT080-BOOKID,
+*          LV_WERKS  TYPE ZEA_MMT190-WERKS.
+*
+*    LOOP AT IT_KEY_TAB INTO DATA(LS_KEY). " 괄호 안의 값들을 점검
+*      CASE LS_KEY-NAME.
+*        WHEN 'Bookid'.
+*          LV_BOOKID = LS_KEY-VALUE.
+*        WHEN 'Werks'.
+*          LV_WERKS = LS_KEY-VALUE.
+*      ENDCASE.
+*    ENDLOOP.
+
+*    IF SY-SUBRC EQ 0.
+      SELECT *
+        FROM ZEA_MMT190 AS A
+        LEFT JOIN ZEA_MMT070 AS B
+        ON A~MATNR EQ B~MATNR
+        AND A~WERKS EQ B~WERKS
+*       WHERE A~WERKS EQ @LV_WERKS
+        INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+*    ELSE.
+*
+*      SELECT *
+*        FROM ZEA_MMT190 AS A
+*        LEFT JOIN ZEA_MMT070 AS B
+*        ON A~MATNR EQ B~MATNR
+*        AND A~WERKS EQ B~WERKS
+*       WHERE A~WERKS EQ @LV_WERKS
+*        INTO CORRESPONDING FIELDS OF TABLE @ET_ENTITYSET.
+
+
+*    ENDIF.
+
+
+  ENDMETHOD.
+ENDCLASS.

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] MM 모듈 KZ 자동함수 생성</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_FI_KZF01</SOBJ_NAME>
+    <SOBJ_NAME>LZEA_FI_KZTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_FI_KZ</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_FI_KZ</FUNCNAME>
+     <SHORT_TEXT>[FI] MM 모듈 KZ 자동함수 생성</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_AP_RECON</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_SAKNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_BUDAT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BUDAT</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_PAY_AMOUNT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_DMBTR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_D_WAERS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_WAERS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_KRW_AMOUNT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_DMBTR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_WAERS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_WAERS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_MBLNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BELNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_BANK_SAKNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_SAKNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BELNR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_AP_RECON</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT> G/L 계정 (Recon)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_BUDAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전기일자</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_PAY_AMOUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표 내 기록된 매입채무 총액(USD또는KRW)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_D_WAERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표 기록 통화코드 (USD또는KRW)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_KRW_AMOUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>통화금액(KRW)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_WAERS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>현지통화코드 (KRW)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_MBLNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>참조문서(KA전표번호)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_BANK_SAKNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>G/L 계정 (BANK Recon)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>전표번호</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_W3MI" serializer_version="v2.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <NAME>ZEA_PP110_3</NAME>
+   <TEXT>압연공정</TEXT>
+   <PARAMS>
+    <WWWPARAMS>
+     <RELID>MI</RELID>
+     <OBJID>ZEA_PP110_3</OBJID>
+     <NAME>fileextension</NAME>
+     <VALUE>.jpeg</VALUE>
+    </WWWPARAMS>
+    <WWWPARAMS>
+     <RELID>MI</RELID>
+     <OBJID>ZEA_PP110_3</OBJID>
+     <NAME>filename</NAME>
+     <VALUE>img3.jpeg</VALUE>
+    </WWWPARAMS>
+    <WWWPARAMS>
+     <RELID>MI</RELID>
+     <OBJID>ZEA_PP110_3</OBJID>
+     <NAME>mimetype</NAME>
+     <VALUE>image/jpeg</VALUE>
+    </WWWPARAMS>
+   </PARAMS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,3 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/Device","sync/e17/inventory4/model/models"],function(e,t,i){"use strict";return e.extend("sync.e17.inventory4.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);t+
+his.getRouter().initialize();this.setModel(i.createDeviceModel(),"device")}})});                                                                                                                                                                               
+//# sourceMappingURL=Component.js.map                                                                                                                                                                                                                          

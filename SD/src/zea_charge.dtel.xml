@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZEA_CHARGE</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZEA_CHARGE</DOMNAME>
+    <HEADLEN>20</HEADLEN>
+    <SCRLEN1>05</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>공제액</DDTEXT>
+    <REPTEXT>공제액</REPTEXT>
+    <SCRTEXT_S>공제액</SCRTEXT_S>
+    <SCRTEXT_M>공제액</SCRTEXT_M>
+    <SCRTEXT_L>공제액</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

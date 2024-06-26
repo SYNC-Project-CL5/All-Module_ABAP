@@ -1,0 +1,72 @@
+*&---------------------------------------------------------------------*
+*& Include          ZEA_TR_TEM_TOP
+*&---------------------------------------------------------------------*
+
+TABLES : ZEA_SDT020, ZEA_SDT030, ZEA_T001W.
+
+*CLASS : cl_gui_column_tree DEFINITION LOAD,
+*        cl_gui_cfw         DEFINITION LOAD.
+
+DATA: BEGIN OF GS_DATA,
+        SAPNR   TYPE ZEA_SDT030-SAPNR,
+        SP_YEAR TYPE ZEA_SDT030-SP_YEAR,
+        POSNR   TYPE ZEA_SDT030-POSNR,
+        WERKS   TYPE ZEA_SDT030-WERKS,
+        PNAME1  TYPE ZEA_T001W-PNAME1, " 플랜트명 새로 추가.
+        MATNR   TYPE ZEA_SDT030-MATNR,
+        MAKTX   TYPE ZEA_MMT020-MAKTX, " 자재명 추가
+        SAPQU   TYPE ZEA_SDT030-SAPQU,
+        MEINS   TYPE ZEA_SDT030-MEINS,
+        TOTREV  TYPE ZEA_SDT020-TOTREV,
+        NETPR   TYPE ZEA_SDT030-NETPR,
+        WAERS   TYPE ZEA_SDT030-WAERS,
+        SPQTY1  TYPE ZEA_SDT030-SPQTY1,
+        SPQTY2  TYPE ZEA_SDT030-SPQTY2,
+        SPQTY3  TYPE ZEA_SDT030-SPQTY3,
+        SPQTY4  TYPE ZEA_SDT030-SPQTY4,
+        SPQTY5  TYPE ZEA_SDT030-SPQTY5,
+        SPQTY6  TYPE ZEA_SDT030-SPQTY6,
+        SPQTY7  TYPE ZEA_SDT030-SPQTY7,
+        SPQTY8  TYPE ZEA_SDT030-SPQTY8,
+        SPQTY9  TYPE ZEA_SDT030-SPQTY9,
+        SPQTY10 TYPE ZEA_SDT030-SPQTY10,
+        SPQTY11 TYPE ZEA_SDT030-SPQTY11,
+        SPQTY12 TYPE ZEA_SDT030-SPQTY12,
+        STATUS2 TYPE ZEA_SDT030-STATUS2,
+        LOEKZ   TYPE ZEA_SDT030-LOEKZ,
+      END OF GS_DATA,
+
+      GT_DATA LIKE TABLE OF GS_DATA,
+
+      BEGIN OF GS_TREE,
+        LEVEL0          TYPE SETID,
+        LEVEL0_TEXT(50),
+        LEVEL1          TYPE SETID,
+        LEVEL1_TEXT(50),
+        LEVEL2          TYPE SETID,
+        LEVEL2_TEXT(50),
+        SP_YEAR         TYPE ZEA_SDT030-SP_YEAR,
+        POSNR           TYPE ZEA_SDT030-POSNR,
+        WERKS           TYPE ZEA_SDT030-WERKS,
+        PNAME1          TYPE ZEA_T001W-PNAME1, " 플랜트명 새로 추가.
+        MATNR           TYPE ZEA_SDT030-MATNR,
+        SAPQU           TYPE ZEA_SDT030-SAPQU,
+        MEINS           TYPE ZEA_SDT030-MEINS,
+        NETPR           TYPE ZEA_SDT030-NETPR,
+        WAERS           TYPE ZEA_SDT030-WAERS,
+      END OF GS_TREE,
+
+      GT_TREE LIKE TABLE OF GS_TREE.
+
+* Tree ALV
+DATA : GCL_CONTAINER TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+       GCL_TREE      TYPE REF TO CL_GUI_ALV_TREE_SIMPLE,
+*       gcl_tree      TYPE REF TO cl_gui_alv_tree,
+       GS_FCAT       TYPE LVC_S_FCAT,
+       GT_FCAT       TYPE LVC_T_FCAT,
+       GS_SORT       TYPE LVC_S_SORT,
+       GT_SORT       TYPE LVC_T_SORT,
+       GS_LAYOUT     TYPE LVC_S_LAYO,
+       GS_VARIANT    TYPE DISVARIANT.
+
+DATA : OK_CODE TYPE SY-UCOMM.

@@ -1,0 +1,30 @@
+FUNCTION-POOL ZEA_FI_KA.                    "MESSAGE-ID ..
+
+* INCLUDE LZEA_FI_KAD...                     " Local class definition
+
+TABLES: ZEA_BKPF, ZEA_BSEG. " FI 헤더/아이템
+TABLES: ZEA_TVZBT. " 지급조건
+TABLES: ZEA_TCURR. " 환율
+
+" FI 전표 헤더 테이블
+DATA: GT_BKPF TYPE TABLE OF ZEA_BKPF,
+      GS_BKPF TYPE ZEA_BKPF.
+
+" FI 전표 아이템 테이블
+DATA: GT_BSEG TYPE TABLE OF ZEA_BSEG,
+      GS_BSEG TYPE ZEA_BSEG.
+
+" FI 환율 테이블
+DATA: GS_TCURR TYPE ZEA_TCURR,
+      GT_TCURR TYPE TABLE OF ZEA_TCURR.
+DATA: GV_COVT_AMOUNT TYPE ZEA_BSEG-WRBTR.
+
+" BP 코드 조회
+DATA: GV_RECON TYPE ZEA_SKB1-SAKNR,
+      LV_SAKNR TYPE ZEA_SKB1-SAKNR.
+
+DATA: LV_TOTCOST TYPE ZEA_BSEG-WRBTR.
+
+* --FI 전표번호 채번
+DATA: GV_BELNR_NUMBER TYPE ZEA_BKPF-BELNR.      " 전표번호(key)
+DATA: GV_ITNUM TYPE N.                          " Item 라인번호

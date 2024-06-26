@@ -1,0 +1,154 @@
+*&---------------------------------------------------------------------*
+*& Include          ZALV_GRID_DISPLAY_TOP
+*&---------------------------------------------------------------------*
+TABLES: ZEA_STKO,
+        ZEA_STPO,
+        ZEA_T001W,
+        ZEA_MMT010,
+        ZEA_MMT020.
+
+CLASS LCL_EVENT_HANDLER DEFINITION DEFERRED.
+
+CONSTANTS: GC_SAVE               TYPE STRING VALUE 'SAVE',
+           GC_REFRESH            TYPE STRING VALUE 'REFRESH',
+           GC_CREATE             TYPE STRING VALUE 'CREATE',
+           GC_CHANGE             TYPE STRING VALUE 'CHANGE',
+           GC_DELETE             TYPE STRING VALUE 'DELETE',
+           GC_FIN_SEMI_MATERIALS TYPE STRING VALUE 'FIN_SEMI_MATERIALS',
+           GC_SEMI_RAW_MATERIALS TYPE STRING VALUE 'SEMI_RAW_MATERIALS',
+           GC_FINISHED_MATERIALS TYPE STRING VALUE 'FINISHED_MATERIALS',
+           GC_SEMI_MATERIALS     TYPE STRING VALUE 'SEMI_MATERIALS',
+           GC_RAW_MATERIALS      TYPE STRING VALUE 'RAW_MATERIALS'.
+
+
+DATA: BEGIN OF GS_DATA,
+        BOMID   TYPE ZEA_STKO-BOMID,
+        WERKS   TYPE ZEA_STKO-WERKS,
+        PNAME1  TYPE ZEA_T001W-PNAME1,
+        MATNR   TYPE ZEA_STKO-MATNR,
+        MAKTX   TYPE ZEA_MMT020-MAKTX,
+        MATTYPE TYPE ZEA_MMT010-MATTYPE,
+        MENGE   TYPE ZEA_STKO-MENGE,
+        MEINS   TYPE ZEA_STKO-MEINS,
+        ERNAM   TYPE ZEA_STKO-ERNAM,
+        ERDAT   TYPE ZEA_STKO-ERDAT,
+        ERZET   TYPE ZEA_STKO-ERZET,
+        AENAM   TYPE ZEA_STKO-AENAM,
+        AEDAT   TYPE ZEA_STKO-AEDAT,
+        AEZET   TYPE ZEA_STKO-AEZET,
+      END OF GS_DATA.
+
+
+DATA: GT_DATA LIKE TABLE OF GS_DATA.
+
+*DATA: GT_DATA TYPE TABLE OF ZEA_STKO,
+*      GS_DATA TYPE ZEA_STKO.
+
+DATA: BEGIN OF GS_DISPLAY.
+        INCLUDE STRUCTURE GS_DATA.
+DATA:   STATUS          LIKE ICON-ID, " 아이콘
+        COLOR           TYPE C LENGTH 4, " 행 색상 정보
+        LIGHT           TYPE C,          " 신호등 표시를 위한
+        " EXCEPTION 필드
+        " 0:비움 1:빨강 2:노랑 3:초록
+        IT_FIELD_COLORS TYPE LVC_T_SCOL, " 셀 별 색상정보 인터널 테이블
+        STYLE           TYPE LVC_T_STYL, " 셀 스타일(모양)
+        MARK            TYPE CHAR1,      " 셀의 마킹 정보
+      END OF GS_DISPLAY.
+
+DATA: GT_DISPLAY LIKE TABLE OF GS_DISPLAY.
+
+DATA: BEGIN OF GS_DATA2,
+        BOMID    TYPE ZEA_STPO-BOMID,
+        BOMINDEX TYPE ZEA_STPO-BOMINDEX,
+        MATNR    TYPE ZEA_STPO-MATNR,
+        MAKTX    TYPE ZEA_MMT020-MAKTX,
+        MATTYPE  TYPE ZEA_MMT010-MATTYPE,
+        MENGE    TYPE ZEA_STPO-MENGE,
+        MEINS    TYPE ZEA_STPO-MEINS,
+        ERNAM    TYPE ZEA_STPO-ERNAM,
+        ERDAT    TYPE ZEA_STPO-ERDAT,
+        ERZET    TYPE ZEA_STPO-ERZET,
+        AENAM    TYPE ZEA_STPO-AENAM,
+        AEDAT    TYPE ZEA_STPO-AEDAT,
+        AEZET    TYPE ZEA_STPO-AEZET,
+      END OF GS_DATA2.
+
+
+DATA GT_DATA2 LIKE TABLE OF GS_DATA2.
+
+DATA: BEGIN OF GS_DISPLAY2.
+        INCLUDE STRUCTURE GS_DATA2.
+DATA:   STATUS          LIKE ICON-ID, " 아이콘
+        COLOR           TYPE C LENGTH 4, " 행 색상 정보
+        LIGHT           TYPE C,          " 신호등 표시를 위한
+        " EXCEPTION 필드
+        " 0:비움 1:빨강 2:노랑 3:초록
+        IT_FIELD_COLORS TYPE LVC_T_SCOL, " 셀 별 색상정보 인터널 테이블
+        STYLE           TYPE LVC_T_STYL, " 셀 스타일(모양)
+        MARK            TYPE CHAR1,      " 셀의 마킹 정보
+      END OF GS_DISPLAY2.
+
+DATA: GT_DISPLAY2 LIKE TABLE OF GS_DISPLAY2.
+
+DATA: GS_FIELD_COLOR TYPE LVC_S_SCOL.
+
+DATA: BEGIN OF GS_MMT010,
+        MATNR   TYPE ZEA_MMT010-MATNR,
+        MATTYPE TYPE ZEA_MMT010-MATTYPE,
+        MAKTX   TYPE ZEA_MMT020-MAKTX,
+        WEIGHT  TYPE ZEA_MMT010-WEIGHT,
+        MEINS1  TYPE ZEA_MMT010-MEINS1,
+      END OF GS_MMT010.
+
+DATA: GO_DOCK          TYPE REF TO CL_GUI_DOCKING_CONTAINER,
+      GO_SPLIT         TYPE REF TO CL_GUI_SPLITTER_CONTAINER,
+      GO_CONTAINER_1   TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_CONTAINER_2   TYPE REF TO CL_GUI_CUSTOM_CONTAINER,
+      GO_ALV_GRID_1    TYPE REF TO CL_GUI_ALV_GRID,
+      GO_ALV_GRID_2    TYPE REF TO CL_GUI_ALV_GRID,
+      GO_EVENT_HANDLER TYPE REF TO LCL_EVENT_HANDLER.
+
+DATA: GS_VARIANT    TYPE DISVARIANT,
+      GV_SAVE       TYPE C,
+
+      GT_FIELDCAT   TYPE LVC_T_FCAT,
+      GS_FIELDCAT   TYPE LVC_S_FCAT,
+
+      GS_LAYOUT     TYPE LVC_S_LAYO,
+
+      GT_FILTER     TYPE LVC_T_FILT,
+      GS_FILTER     TYPE LVC_S_FILT,
+
+      GT_INDEX_ROWS TYPE LVC_T_ROW,
+      GS_INDEX_ROWS TYPE LVC_S_ROW,
+
+      GT_TOOLBAR    TYPE UI_FUNCTIONS,
+
+      GT_F4         TYPE LVC_T_F4,
+      GS_F4         TYPE LVC_S_F4,
+
+      OK_CODE       TYPE SY-UCOMM,
+      GV_LINES      TYPE SY-TFILL,
+      GV_ANSWER     TYPE CHAR1,
+      GV_CHANGED.
+
+*----------------------------------------------------------------------*
+* Common MACRO
+*----------------------------------------------------------------------*
+DEFINE _MC_POPUP_CONFIRM.
+  CALL FUNCTION 'POPUP_TO_CONFIRM'
+    EXPORTING
+      TITLEBAR              = &1
+*      DISPLAY_CANCEL_BUTTON = ''
+      TEXT_QUESTION         = &2
+      TEXT_BUTTON_1         = 'YES'
+      ICON_BUTTON_1         = '@2K@'
+      TEXT_BUTTON_2         = 'NO'
+      ICON_BUTTON_2         = '@2O@ '
+    IMPORTING
+      ANSWER                = &3
+    EXCEPTIONS
+      TEXT_NOT_FOUND        = 1
+      OTHERS                = 2.
+END-OF-DEFINITION.

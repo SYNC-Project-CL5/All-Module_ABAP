@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZEA_BPROLE</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZEA_BPROLE</DOMNAME>
+    <HEADLEN>02</HEADLEN>
+    <SCRLEN1>02</SCRLEN1>
+    <SCRLEN2>02</SCRLEN2>
+    <SCRLEN3>02</SCRLEN3>
+    <DDTEXT>[FI] BP ROLE</DDTEXT>
+    <REPTEXT>역할</REPTEXT>
+    <SCRTEXT_S>역할</SCRTEXT_S>
+    <SCRTEXT_M>역할</SCRTEXT_M>
+    <SCRTEXT_L>역할</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

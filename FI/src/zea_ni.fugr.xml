@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] 당기순이익 함수</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZEA_NITOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZEA_NI</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZEA_NI</FUNCNAME>
+     <SHORT_TEXT>당기순이익 Exporting을 위한 함수</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_INCOME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZEA_BSEG-DMBTR</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>EV_INCOME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>통화금액(KRW)</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

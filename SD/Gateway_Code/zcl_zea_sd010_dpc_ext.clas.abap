@@ -1,0 +1,41 @@
+class ZCL_ZEA_SD010_DPC_EXT definition
+  public
+  inheriting from ZCL_ZEA_SD010_DPC
+  create public .
+
+public section.
+protected section.
+
+  methods SDT010SET_GET_ENTITYSET
+    redefinition .
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ZEA_SD010_DPC_EXT IMPLEMENTATION.
+
+
+  method SDT010SET_GET_ENTITYSET.
+
+*     DATA R_TELNO TYPE RANGE OF ZEA_SDT080-TELNO.
+*
+*     LOOP AT IT_FILTER_SELECT_OPTIONS INTO DATA(LS_FILTER).
+*      CASE LS_FILTER-PROPERTY.
+*        WHEN 'Telno'.
+*          MOVE-CORRESPONDING LS_FILTER-SELECT_OPTIONS TO R_TELNO.
+*      ENDCASE.
+*    ENDLOOP.
+*
+*    DATA(LV_TOP) = IO_TECH_REQUEST_CONTEXT->GET_TOP( ).
+
+    SELECT *
+      FROM ZEA_SDT010
+*      UP TO IS_PAGING-TOP ROWS
+      INTO CORRESPONDING FIELDS OF TABLE ET_ENTITYSET
+*      WHERE TELNO IN R_TELNO
+      ORDER BY PRIMARY KEY.
+
+
+  endmethod.
+ENDCLASS.
